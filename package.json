@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch api/index.ts"
+    "dev": "tsx api/index.ts"
   },
   "keywords": [],
   "author": "Antonio Claudio",
