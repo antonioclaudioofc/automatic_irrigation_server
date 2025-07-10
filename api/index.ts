@@ -11,6 +11,8 @@ app.register(fastifyWebsocket);
 
 app.register(routes);
 
-app.listen({ port: parseInt(process.env.PORT || "3333") }).then(() => {
-  console.log("HTTP server running!");
-});
+app
+  .listen({ port: parseInt(process.env.PORT || "3333"), host: "0.0.0.0" })
+  .then(() => {
+    console.log("HTTP server running!");
+  });
