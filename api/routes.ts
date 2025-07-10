@@ -1,7 +1,6 @@
 import { FastifyInstance, FastifyRequest } from "fastify";
 import { realtime } from "./firebase";
 import { WebSocket } from "@fastify/websocket";
-import { WebSocketServer } from "ws";
 
 type IrrigationBody = {
   plantName: string;
