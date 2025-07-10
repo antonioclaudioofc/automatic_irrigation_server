@@ -2,9 +2,11 @@
   "name": "server_embarca",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "tsx api/index.ts"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch --env-file=.env api/index.ts"
   },
   "keywords": [],
   "author": "Antonio Claudio",
