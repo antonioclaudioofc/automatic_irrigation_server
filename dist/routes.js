@@ -40,4 +40,40 @@ async function routes(app) {
             ref.off("value", listener);
         });
     });
+    app.delete("/irrigation/:id", async (request, reply) => {
+        const { id } = request.params;
+        if (!id) {
+            return reply.status(400).send({ error: "ID da irrigação é obrigatório" });
+        }
+        try {
+            const ref = firebase_1.realtime.ref(`irrigation/${id}`);
+            await ref.remove();
+            return reply.status(200).send({ ok: true });
+        }
+        catch (err) {
+            console.error("Erro ao excluir irrigação:", err);
+            return reply
+                .status(500)
+                .send({ error: "Erro interno ao excluir irrigação" });
+        }
+    });
+    app.put("/irrigation/:id", async (request, reply) => {
+        const { id } = request.params;
+        const updates = request.body;
+        try {
+            const ref = firebase_1.realtime.ref(`irrigation/${id}`);
+            const snapshot = await ref.once("value");
+            if (!snapshot.exists()) {
+                return reply.status(404).send({ error: "Irrigação não encontrada" });
+            }
+            await ref.update(updates);
+            return reply.send({ ok: true, id });
+        }
+        catch (error) {
+            console.error("Erro ao atualizar irrigação:", error);
+            return reply
+                .status(500)
+                .send({ error: "Erro interno ao atualizar irrigação" });
+        }
+    });
 }

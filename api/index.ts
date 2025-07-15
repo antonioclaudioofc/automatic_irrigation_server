@@ -5,7 +5,10 @@ import fastifyWebsocket from "@fastify/websocket";
 
 const app = fastify();
 
-app.register(fastifyCors, { origin: "*" });
+app.register(fastifyCors, {
+  origin: "*",
+  methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"], 
+});
 
 app.register(fastifyWebsocket);
 
